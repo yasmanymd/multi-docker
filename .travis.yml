@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t yasmanymd/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t yasmany/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true yasmanymd/react-test npm test
+  - docker run -e CI=true yasmany/react-test npm test
 
 after_success:
-  - docker build -t yasmanymd/multi-client ./client
-  - docker build -t yasmanymd/multi-nginx ./nginx
-  - docker build -t yasmanymd/multi-server ./server
-  - docker build -t yasmanymd/multi-worker ./worker
+  - docker build -t yasmany/multi-client ./client
+  - docker build -t yasmany/multi-nginx ./nginx
+  - docker build -t yasmany/multi-server ./server
+  - docker build -t yasmany/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push yasmanymd/multi-client
-  - docker push yasmanymd/multi-nginx
-  - docker push yasmanymd/multi-server
-  - docker push yasmanymd/multi-worker
+  - docker push yasmany/multi-client
+  - docker push yasmany/multi-nginx
+  - docker push yasmany/multi-server
+  - docker push yasmany/multi-worker
