@@ -22,15 +22,4 @@ after_success:
   - docker push yasmany/multi-nginx-10-14
   - docker push yasmany/multi-server-10-14
   - docker push yasmany/multi-worker-10-14
-
-deploy:
-  provider: elasticbeanstalk
-  region: 'ca-central-1'
-  app: 'multi-docker'
-  env: 'Multidocker-env'
-  bucket_name: 'elasticbeanstalk-ca-central-1-235708456893'
-  bucket_path: 'docker-multi'
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  
