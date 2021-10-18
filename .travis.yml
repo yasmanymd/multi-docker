@@ -11,17 +11,17 @@ script:
   - docker run -e CI=true yasmany/react-test npm test
 
 after_success:
-  - docker build -t yasmany/multi-client ./client
-  - docker build -t yasmany/multi-nginx ./nginx
-  - docker build -t yasmany/multi-server ./server
-  - docker build -t yasmany/multi-worker ./worker
+  - docker build -t yasmany/multi-client-10-14 ./client
+  - docker build -t yasmany/multi-nginx-10-14 ./nginx
+  - docker build -t yasmany/multi-server-10-14 ./server
+  - docker build -t yasmany/multi-worker-10-14 ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push yasmany/multi-client
-  - docker push yasmany/multi-nginx
-  - docker push yasmany/multi-server
-  - docker push yasmany/multi-worker
+  - docker push yasmany/multi-client-10-14
+  - docker push yasmany/multi-nginx-10-14
+  - docker push yasmany/multi-server-10-14
+  - docker push yasmany/multi-worker-10-14
 
 deploy:
   provider: elasticbeanstalk
@@ -29,7 +29,7 @@ deploy:
   app: 'multi-docker'
   env: 'Multidocker-env'
   bucket_name: 'elasticbeanstalk-ca-central-1-235708456893'
-  bucket-path: 'docker-multi'
+  bucket_path: 'docker-multi'
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
